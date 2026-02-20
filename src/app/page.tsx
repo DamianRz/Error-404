@@ -1,6 +1,7 @@
 "use client";
 
-import { useState } from "react";
+import Link from "next/link";
+import { useMemo, useState } from "react";
 import styled from "styled-components";
 
 const Wrapper = styled.main`
@@ -16,7 +17,7 @@ const Terminal = styled.section`
   border: 1px solid #1f6f2a;
   background: #000000;
   display: grid;
-  grid-template-rows: auto auto 1fr;
+  grid-template-rows: auto auto 1fr auto;
 `;
 
 const Header = styled.div`
@@ -35,18 +36,38 @@ const Output = styled.pre`
   word-break: break-word;
 `;
 
+const HintBar = styled.div`
+  border-top: 1px solid #1f6f2a;
+  border-bottom: 1px solid #1f6f2a;
+  padding: 0.75rem 1rem;
+  color: #72ff87;
+  display: flex;
+  gap: 0.7rem;
+  flex-wrap: wrap;
+`;
+
+const ToolLink = styled(Link)`
+  color: #b0ffbe;
+  text-decoration: underline;
+`;
+
 const Input = styled.textarea`
   width: 100%;
   height: 100%;
   resize: none;
   border: 0;
-  border-top: 1px solid #1f6f2a;
   outline: none;
   background: #000000;
   color: #72ff87;
   padding: 1rem;
   font: inherit;
   line-height: 1.5;
+`;
+
+const Footer = styled.div`
+  border-top: 1px solid #1f6f2a;
+  padding: 0.6rem 1rem;
+  color: #72ff87;
 `;
 
 const initialText = [
@@ -61,11 +82,17 @@ const initialText = [
 export default function Home() {
   const [text, setText] = useState("");
 
+  const lines = useMemo(() => text.split("\n").length, [text]);
+
   return (
     <Wrapper>
       <Terminal>
         <Header>retro-console</Header>
         <Output>{initialText}</Output>
+        <HintBar>
+          <span>[suggested] /tools/estimativos</span>
+          <ToolLink href="/tools/estimativos">open /tools/estimativos</ToolLink>
+        </HintBar>
         <Input
           aria-label="retro console input"
           value={text}
@@ -73,6 +100,7 @@ export default function Home() {
           spellCheck={false}
           autoFocus
         />
+        <Footer>{`lines: ${lines}`}</Footer>
       </Terminal>
     </Wrapper>
   );
