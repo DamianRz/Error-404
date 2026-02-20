@@ -46,20 +46,20 @@ const WEEK_DAYS = ["Lun", "Mar", "Mie", "Jue", "Vie", "Sab", "Dom"];
 
 const Page = styled.main`
   min-height: 100vh;
-  background: #000;
-  color: #72ff87;
+  background: #ffffff;
+  color: #202124;
   padding: 1rem;
 `;
 
 const Shell = styled.div`
   width: min(1500px, 100%);
   margin: 0 auto;
-  border: 1px solid #1f6f2a;
-  background: #000;
+  border: 1px solid #dadce0;
+  background: #ffffff;
 `;
 
 const Top = styled.section`
-  border-bottom: 1px solid #1f6f2a;
+  border-bottom: 1px solid #dadce0;
   padding: 0.9rem;
   display: grid;
   gap: 0.8rem;
@@ -77,7 +77,7 @@ const Row = styled.div`
 `;
 
 const Card = styled.div`
-  border: 1px solid #1f6f2a;
+  border: 1px solid #dadce0;
   padding: 0.65rem;
   min-width: 220px;
   flex: 1;
@@ -89,29 +89,39 @@ const Small = styled.div`
 
 const Input = styled.input`
   width: 100%;
-  background: #000;
-  color: #72ff87;
-  border: 1px solid #1f6f2a;
+  background: #ffffff;
+  color: #202124;
+  border: 1px solid #dadce0;
   padding: 0.4rem;
   font: inherit;
+
+  &:focus {
+    outline: 2px solid #1a73e8;
+    outline-offset: -1px;
+    border-color: #1a73e8;
+  }
 `;
 
 const Select = styled.select`
   width: 100%;
-  background: #000;
-  color: #72ff87;
-  border: 1px solid #1f6f2a;
+  background: #ffffff;
+  color: #202124;
+  border: 1px solid #dadce0;
   padding: 0.4rem;
   font: inherit;
 `;
 
 const Button = styled.button`
-  background: #000;
-  color: #72ff87;
-  border: 1px solid #1f6f2a;
+  background: #ffffff;
+  color: #202124;
+  border: 1px solid #dadce0;
   padding: 0.36rem 0.6rem;
   font: inherit;
   cursor: pointer;
+
+  &:hover {
+    background: #f1f3f4;
+  }
 `;
 
 const Months = styled.section`
@@ -121,7 +131,7 @@ const Months = styled.section`
 `;
 
 const MonthWrap = styled.article`
-  border: 1px solid #1f6f2a;
+  border: 1px solid #dadce0;
   display: grid;
   grid-template-columns: 2.2fr 1.2fr;
 
@@ -131,12 +141,12 @@ const MonthWrap = styled.article`
 `;
 
 const MonthMain = styled.div`
-  border-right: 1px solid #1f6f2a;
+  border-right: 1px solid #dadce0;
   padding: 0.8rem;
 
   @media (max-width: 1100px) {
     border-right: 0;
-    border-bottom: 1px solid #1f6f2a;
+    border-bottom: 1px solid #dadce0;
   }
 `;
 
@@ -159,7 +169,8 @@ const WeekHeader = styled.div`
 `;
 
 const WeekDay = styled.div`
-  border: 1px solid #1f6f2a;
+  border: 1px solid #dadce0;
+  background: #f8f9fa;
   text-align: center;
   padding: 0.22rem;
   font-size: 0.75rem;
@@ -173,13 +184,15 @@ const Grid = styled.div`
 
 const Cell = styled.div<{ $active: boolean; $faded: boolean }>`
   min-height: 72px;
-  border: 1px solid ${({ $active }) => ($active ? "#72ff87" : "#1f6f2a")};
-  opacity: ${({ $faded }) => ($faded ? 0.5 : 1)};
+  border: 1px solid ${({ $active }) => ($active ? "#1a73e8" : "#dadce0")};
+  background: ${({ $active, $faded }) => ($active ? "#e8f0fe" : $faded ? "#f8f9fa" : "#fff")};
+  opacity: 1;
   padding: 0.2rem;
   display: grid;
   grid-template-rows: auto 1fr;
   gap: 0.2rem;
-  cursor: default;
+  cursor: cell;
+  user-select: none;
 `;
 
 const CellDate = styled.div`
@@ -188,15 +201,15 @@ const CellDate = styled.div`
 
 const CellInput = styled.input`
   width: 100%;
-  background: #000;
-  color: #72ff87;
-  border: 1px solid #1f6f2a;
+  background: #ffffff;
+  color: #202124;
+  border: 1px solid #dadce0;
   font: inherit;
   padding: 0.22rem;
 `;
 
 const Divider = styled.div`
-  border-top: 1px solid #1f6f2a;
+  border-top: 1px solid #dadce0;
 `;
 
 const ExpenseHead = styled.div`
@@ -209,25 +222,29 @@ const ExpenseRow = styled.div<{ $selected: boolean }>`
   display: grid;
   gap: 0.3rem;
   grid-template-columns: 1.3fr 0.8fr 0.7fr;
-  border: 1px solid ${({ $selected }) => ($selected ? "#72ff87" : "transparent")};
+  border: 1px solid ${({ $selected }) => ($selected ? "#1a73e8" : "transparent")};
+  background: ${({ $selected }) => ($selected ? "#e8f0fe" : "#fff")};
   padding: 0.2rem;
+  user-select: none;
 `;
 
 const ResultBox = styled.div`
-  border: 1px solid #1f6f2a;
+  border: 1px solid #dadce0;
   padding: 0.5rem;
   font-size: 0.8rem;
+  background: #fff;
 `;
 
 const Menu = styled.div`
   position: fixed;
   z-index: 80;
   min-width: 290px;
-  border: 1px solid #1f6f2a;
-  background: #000;
+  border: 1px solid #dadce0;
+  background: #ffffff;
   padding: 0.55rem;
   display: grid;
   gap: 0.45rem;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.14);
 `;
 
 function dateKey(year: number, monthIndex: number, day: number) {
@@ -346,21 +363,30 @@ export default function EstimativosPage() {
 
   const menuRef = useRef<HTMLDivElement | null>(null);
   const draggingRef = useRef(false);
+  const expenseDraggingRef = useRef<{ active: boolean; monthKey: string }>({ active: false, monthKey: "" });
 
   useEffect(() => {
     function up() {
       draggingRef.current = false;
+      expenseDraggingRef.current.active = false;
     }
     function closeMenu(ev: MouseEvent) {
       if (menuRef.current && ev.target instanceof Node && !menuRef.current.contains(ev.target)) {
         setMenu((prev) => ({ ...prev, visible: false }));
       }
     }
+    function closeMenuFromContext(ev: MouseEvent) {
+      if (menuRef.current && ev.target instanceof Node && !menuRef.current.contains(ev.target)) {
+        setMenu((prev) => ({ ...prev, visible: false }));
+      }
+    }
     window.addEventListener("mouseup", up);
-    window.addEventListener("mousedown", closeMenu);
+    window.addEventListener("mousedown", closeMenu, true);
+    window.addEventListener("contextmenu", closeMenuFromContext, true);
     return () => {
       window.removeEventListener("mouseup", up);
-      window.removeEventListener("mousedown", closeMenu);
+      window.removeEventListener("mousedown", closeMenu, true);
+      window.removeEventListener("contextmenu", closeMenuFromContext, true);
     };
   }, []);
 
@@ -462,6 +488,30 @@ export default function EstimativosPage() {
     setMenu({ visible: true, kind: "expenses", monthKey: month, x: ev.clientX + 4, y: ev.clientY + 4 });
   }
 
+  function onExpenseMouseDown(monthKey: string, id: string, ctrl: boolean) {
+    expenseDraggingRef.current = { active: true, monthKey };
+    setSelectedExpenses((prev) => {
+      const current = prev[monthKey] ?? [];
+      if (ctrl) {
+        return {
+          ...prev,
+          [monthKey]: current.includes(id) ? current.filter((x) => x !== id) : [...current, id],
+        };
+      }
+      return { ...prev, [monthKey]: [id] };
+    });
+  }
+
+  function onExpenseMouseEnter(monthKey: string, id: string) {
+    if (!expenseDraggingRef.current.active || expenseDraggingRef.current.monthKey !== monthKey) {
+      return;
+    }
+    setSelectedExpenses((prev) => {
+      const current = prev[monthKey] ?? [];
+      return current.includes(id) ? prev : { ...prev, [monthKey]: [...current, id] };
+    });
+  }
+
   function applyBulkValue() {
     const value = String(Number(bulkValue || 0));
     setDayValues((prev) => {
@@ -521,7 +571,7 @@ export default function EstimativosPage() {
     <Page>
       <Shell>
         <Top>
-          <Title>/tools/estimativos - calendario + gastos (estilo hoja)</Title>
+          <Title>/tools/estimativos - calendario + gastos (estilo planilla)</Title>
           <Small>[uso] click y arrastrar en celdas para seleccionar | ctrl+click para multi-select | click derecho para menu</Small>
           <Row>
             <Card>
@@ -629,21 +679,8 @@ export default function EstimativosPage() {
                     <ExpenseRow
                       key={expense.id}
                       $selected={selectedForMonth.includes(expense.id)}
-                      onClick={(event) => {
-                        const ctrl = event.ctrlKey;
-                        setSelectedExpenses((prev) => {
-                          const current = prev[month.key] ?? [];
-                          if (ctrl) {
-                            return {
-                              ...prev,
-                              [month.key]: current.includes(expense.id)
-                                ? current.filter((id) => id !== expense.id)
-                                : [...current, expense.id],
-                            };
-                          }
-                          return { ...prev, [month.key]: [expense.id] };
-                        });
-                      }}
+                      onMouseDown={(event) => onExpenseMouseDown(month.key, expense.id, event.ctrlKey)}
+                      onMouseEnter={() => onExpenseMouseEnter(month.key, expense.id)}
                       onContextMenu={(event) => openExpenseMenu(event, month.key)}
                     >
                       <Input
